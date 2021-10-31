@@ -1,0 +1,42 @@
+.gallery-wrapper{
+    background-color: #F7F7FC;
+}
+.navbar {
+    background-color: white;
+}
+.body{
+    padding: 1rem;
+}
+h1{
+    padding: 1rem;
+}
+.panting{
+    border-radius: 0.6rem;
+    padding: 0rem;
+    border: 0rem;
+    width: 16rem;
+    margin: 1.8rem;
+}
+.artist-name,.artist-name:focus,.artist-name:hover,.artist-name:not(:disabled):not(:disabled):active{
+    color: blue;
+    background:none;
+    border: none;
+    box-shadow: none;
+}
+.painting-details{
+    min-width: 85vw;
+    max-height: 40vh;
+    padding-top: 2rem;
+    
+}
+.painting-image{
+    height: 35vw;
+    border: none;
+    border-style: hidden;
+    background: transparent;
+}
+.painting-discreption{
+    background: white;
+    padding: 1rem;
+    font-size: 0.7rem;
+}
