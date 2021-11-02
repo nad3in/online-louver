@@ -1,14 +1,24 @@
 .gallery-wrapper{
     background-color: #F7F7FC;
 }
-.navbar {
+.gallery_nav {
     background-color: white;
+}
+.gallery_nav_row{
+    width:100%
 }
 .body{
     padding: 1rem;
 }
-h1{
+.gallery_header{
     padding: 1rem;
+}
+.username{
+    font-size: 1rem;
+}
+.user_role{
+    font-size: 0.8rem;
+    color: gray!important;
 }
 .panting{
     border-radius: 0.6rem;
@@ -28,12 +38,33 @@ h1{
     max-height: 40vh;
     padding-top: 2rem;
     
+} 
+.painting-details>.modal-content{
+    background: transparent;
+    border: none;
+}
+.painting-wrapper{
+    background: transparent;
+    border: none;
+}
+.painting-card{
+    background: transparent;
+    border: none;
 }
 .painting-image{
     height: 35vw;
     border: none;
     border-style: hidden;
     background: transparent;
+}
+.painting-text-wrapper{
+    background: white;  
+}
+.painting-artist{
+    font-size: 0.6rem;
+    color: blue;
+    padding: 1rem 1rem 0rem;
+    margin: 0rem;
 }
 .painting-discreption{
     background: white;

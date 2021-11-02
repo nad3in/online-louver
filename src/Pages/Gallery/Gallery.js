@@ -1,10 +1,25 @@
-import React, { useState } from 'react';
-import { Navbar, Container, Card, Row, Button, Modal } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { Navbar, Container, Card, Row, Col, Button, Modal } from 'react-bootstrap'
 import "./Gallery.css"
+import { setUserInfo } from '../../redux/action/user_actions'
+import { getArtPieces } from '../../redux/action/art_actions'
 
-const Gallery = () => {
+const Gallery = ({ user, setUserInfo, getArtPieces }) => {
     const [showModal, setShowModal] = useState(false);
     const [cardDetails, setCardDetails] = useState(null);
+    const [artPieces, setArtPieces] = useState();
+    useEffect(async () => {
+        if (!user.userName) {
+            setUserInfo({
+                "userName": localStorage.getItem("username"),
+                "userRole": localStorage.getItem("userRole"),
+                "isAuthanticated": true
+            })
+        }
+        const pieces = await getArtPieces({ numberOfElements: 13, pageNumber: 1 });
+        setArtPieces(pieces)
+    }, [])
     const importAll = (r) => {
         let images = {};
         r.keys().forEach((item, index) => { images[item.replace('./', '')] = r(item); });
@@ -12,25 +27,34 @@ const Gallery = () => {
     }
     const images = importAll(require.context('../../Assets/gallery', false, /\.(png|jpe?g|svg)$/));
     const showDetails = (key) => {
-        setCardDetails({ image: key, describe: " Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nunc efficitur diam orci. Suspendisse ornare, turpis ut vulputate aliquam, arcu dolor ornare mi, id placerat metus dui sed erat. Fusce sagittis enim molestie turpis pellentesque" })
+        var artPiece = artPieces[key]
+        setCardDetails({ image: artPiece.picture, description: artPiece.description, artist: artPiece.artist })
         setShowModal(!showModal);
     }
     return (
         <div className="gallery-wrapper">
-            <Navbar sticky="top">
+            <Navbar className="gallery_nav" sticky="top">
                 <Container>
-                    <Navbar.Brand href="#home">Louver</Navbar.Brand>
+                    <Row className="gallery_nav_row">
+                        <Col xs={15} md={11}>
+                            <Navbar.Brand href="#home">Louver</Navbar.Brand>
+                        </Col>
+                        <Col xs={3} md={1}>
+                            <div><Navbar.Brand className="username">{user.userName}</Navbar.Brand></div>
+                            <Navbar.Brand className="user_role">{user.userRole}</Navbar.Brand>
+                        </Col>
+                    </Row>
                 </Container>
             </Navbar>
             <div className='body'>
-                <h1>Gallery</h1>
+                <h1 className="gallery_header">Gallery</h1>
                 <div>
                     <Row md={4}>
-                        {Object.keys(images).map((key, i) => {
+                        {artPieces && Object.keys(artPieces).map((key, i) => {
                             return (<Card className="panting">
-                                <Card.Img variant="top" src={images[key].default} fluid alt="panting" />
+                                <Card.Img variant="top" src={images[artPieces[key].picture].default} fluid alt="panting" />
                                 <Card.Body>
-                                    <Button variant="primary" className="artist-name" onClick={() => showDetails(key)} > Glen Williams</Button>
+                                    <Button variant="primary" className="artist-name" onClick={() => showDetails(key)} > {artPieces[key].artist}</Button>
                                 </Card.Body>
                             </Card>);
                         })}
@@ -46,10 +70,14 @@ const Gallery = () => {
                     aria-labelledby="painting details"
 
                 >
-                    <Modal.Body >
-                        <Card>
+                    <Modal.Body className='painting-wrapper'>
+                        <Card className='painting-card'>
                             <Card.Img className="painting-image" src={images[cardDetails.image].default} fluid alt="panting" variant="top" ></Card.Img>
-                            <Card.Text className="painting-discreption">{cardDetails.describe}</Card.Text>
+                            <span className='painting-text-wrapper'>
+                                <Card.Text className="painting-artist">{cardDetails.artist}</Card.Text>
+                                <Card.Text className="painting-discreption">{cardDetails.description}</Card.Text>
+                            </span>
+
                         </Card>
                     </Modal.Body>
                 </Modal>
@@ -57,4 +85,13 @@ const Gallery = () => {
         </div >
     )
 }
-export default Gallery
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    };
+};
+const mapDispatchToProps = {
+    setUserInfo,
+    getArtPieces
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Gallery)
