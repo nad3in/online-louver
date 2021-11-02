@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Card, Row, Button, Modal } from 'react-bootstrap'
 import "./GuestGallery.css"

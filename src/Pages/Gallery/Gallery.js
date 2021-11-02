@@ -16,10 +16,10 @@ const Gallery = ({ user, setUserInfo, getArtPieces }) => {
             })
         }
         getArtPieces({ numberOfElements: 13, pageNumber: 1 });
-    }, [])
+    })
     const importAll = (r) => {
         let images = {};
-        r.keys().forEach((item, index) => { images[item.replace('./', '')] = r(item); });
+        r.keys().forEach((item) => { images[item.replace('./', '')] = r(item); });
         return images
     }
     const images = importAll(require.context('../../Assets/gallery', false, /\.(png|jpe?g|svg)$/));
@@ -39,7 +39,9 @@ const Gallery = ({ user, setUserInfo, getArtPieces }) => {
                     </Row>
                 </Container>
             </Navbar>
-            <GuestGallery images={images}></GuestGallery>
+            {user.userRole && user.userRole.toLowerCase() === "admin" && <>admin</>}
+            {user.userRole && user.userRole.toLowerCase() === "guest" && <GuestGallery images={images}></GuestGallery>}
+
 
         </div >
     )

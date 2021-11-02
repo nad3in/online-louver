@@ -1,19 +1,24 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router'
 import { Card, Form, Button } from 'react-bootstrap'
 import "./Login.css"
 import { getUserInfo } from '../../redux/action/user_actions'
-import Gallery from '../Gallery/Gallery';
+
 const Login = (props) => {
     const [userEmail, setUserEmail] = useState();
     const [userPassword, setUserPassword] = useState();
-    const login = (e) => {
+    const login = async (e) => {
         e.preventDefault();
         var data = {
             "user_name": userEmail,
             "password": userPassword
         }
-        props.getUserInfo(data);
+        var result = await props.getUserInfo(data);
+        if (result) {
+            console.log("test")
+            props.history.push('/gallery');
+        }
     }
     return (
         <div className="login-wrapper d-flex justify-content-center align-items-center">
@@ -44,4 +49,4 @@ const Login = (props) => {
 const mapDispatchToProps = {
     getUserInfo
 };
-export default connect(null, mapDispatchToProps)(Login)
+export default withRouter(connect(null, mapDispatchToProps)(Login))
