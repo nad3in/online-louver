@@ -1,4 +1,5 @@
 const initialState = {
-    user: {}
+    user: {},
+    artPieces: {}
 };
 export default initialState;

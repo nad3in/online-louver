@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Navbar, Container, Card, Row, Col, Button, Modal } from 'react-bootstrap'
+import { Navbar, Container, Row, Col } from 'react-bootstrap'
 import "./Gallery.css"
 import { setUserInfo } from '../../redux/action/user_actions'
 import { getArtPieces } from '../../redux/action/art_actions'
+import GuestGallery from '../GuestView/GuestGallery';
 
 const Gallery = ({ user, setUserInfo, getArtPieces }) => {
-    const [showModal, setShowModal] = useState(false);
-    const [cardDetails, setCardDetails] = useState(null);
-    const [artPieces, setArtPieces] = useState();
     useEffect(async () => {
         if (!user.userName) {
             setUserInfo({
@@ -17,8 +15,7 @@ const Gallery = ({ user, setUserInfo, getArtPieces }) => {
                 "isAuthanticated": true
             })
         }
-        const pieces = await getArtPieces({ numberOfElements: 13, pageNumber: 1 });
-        setArtPieces(pieces)
+        getArtPieces({ numberOfElements: 13, pageNumber: 1 });
     }, [])
     const importAll = (r) => {
         let images = {};
@@ -26,11 +23,7 @@ const Gallery = ({ user, setUserInfo, getArtPieces }) => {
         return images
     }
     const images = importAll(require.context('../../Assets/gallery', false, /\.(png|jpe?g|svg)$/));
-    const showDetails = (key) => {
-        var artPiece = artPieces[key]
-        setCardDetails({ image: artPiece.picture, description: artPiece.description, artist: artPiece.artist })
-        setShowModal(!showModal);
-    }
+
     return (
         <div className="gallery-wrapper">
             <Navbar className="gallery_nav" sticky="top">
@@ -46,42 +39,8 @@ const Gallery = ({ user, setUserInfo, getArtPieces }) => {
                     </Row>
                 </Container>
             </Navbar>
-            <div className='body'>
-                <h1 className="gallery_header">Gallery</h1>
-                <div>
-                    <Row md={4}>
-                        {artPieces && Object.keys(artPieces).map((key, i) => {
-                            return (<Card className="panting">
-                                <Card.Img variant="top" src={images[artPieces[key].picture].default} fluid alt="panting" />
-                                <Card.Body>
-                                    <Button variant="primary" className="artist-name" onClick={() => showDetails(key)} > {artPieces[key].artist}</Button>
-                                </Card.Body>
-                            </Card>);
-                        })}
-                    </Row>
+            <GuestGallery images={images}></GuestGallery>
 
-                </div >
-            </div >
-            {showModal &&
-                <Modal
-                    show={showModal}
-                    onHide={() => setShowModal(false)}
-                    dialogClassName="painting-details"
-                    aria-labelledby="painting details"
-
-                >
-                    <Modal.Body className='painting-wrapper'>
-                        <Card className='painting-card'>
-                            <Card.Img className="painting-image" src={images[cardDetails.image].default} fluid alt="panting" variant="top" ></Card.Img>
-                            <span className='painting-text-wrapper'>
-                                <Card.Text className="painting-artist">{cardDetails.artist}</Card.Text>
-                                <Card.Text className="painting-discreption">{cardDetails.description}</Card.Text>
-                            </span>
-
-                        </Card>
-                    </Modal.Body>
-                </Modal>
-            }
         </div >
     )
 }
