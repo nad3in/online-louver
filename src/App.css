@@ -5,7 +5,7 @@
 .btn-primary{
     background-color: #5541D7 ;
 }
-.form-control:focus,.btn-primary:not(:disabled):not(:disabled):active,.btn-primary:focus{
+.form-control:focus,.btn-primary:not(:disabled):not(:disabled):active,.btn-primary:focus,.btn-primary:visited{
     outline: none;   
     box-shadow: 0 0 3px 2px #5541D7;
 }

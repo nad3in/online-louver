@@ -15,7 +15,7 @@ const GuestGallery = ({ artPieces, images }) => {
     }
     return (
         <div className='body'>
-            <h1 className="gallery_header">Gallery</h1>
+            <h1 className="gallery-header">Gallery</h1>
             <div>
                 <Row md={4}>
                     {artPieces && Object.keys(artPieces).map((key, i) => {

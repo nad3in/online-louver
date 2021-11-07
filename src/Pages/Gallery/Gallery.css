@@ -1,9 +1,10 @@
 .gallery-wrapper{
     background-color: #F7F7FC;
 }
-.gallery_nav {
+.gallery-nav {
     background-color: white;
+    border-bottom: 1px solid #E5E5E6;
 }
-.gallery_nav_row{
+.gallery-nav-row{
     width:100%
 }

@@ -1,8 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import { Redirect } from "react-router";
-import Login from './Pages/login/Login';
-import Gallery from './Pages/Gallery/Gallery'
+import "./Assets/css/style.css"
 
 
 function App() {
@@ -10,9 +9,6 @@ function App() {
     return (<Redirect to="/gallery" />);
   }
   return (<Redirect to="/" />);
-  // return (
-  //   // <Login></Login>
-  // );
 }
 
 export default App;

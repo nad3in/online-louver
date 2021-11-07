@@ -5,6 +5,7 @@ import "./Gallery.css"
 import { setUserInfo } from '../../redux/action/user_actions'
 import { getArtPieces } from '../../redux/action/art_actions'
 import GuestGallery from '../GuestView/GuestGallery';
+import AdminGallery from '../AdminView/AdminGallery';
 
 const Gallery = ({ user, setUserInfo, getArtPieces }) => {
     useEffect(async () => {
@@ -26,20 +27,20 @@ const Gallery = ({ user, setUserInfo, getArtPieces }) => {
 
     return (
         <div className="gallery-wrapper">
-            <Navbar className="gallery_nav" sticky="top">
+            <Navbar className="gallery-nav" sticky="top">
                 <Container>
-                    <Row className="gallery_nav_row">
+                    <Row className="gallery-nav-row">
                         <Col xs={15} md={11}>
                             <Navbar.Brand href="#home">Louver</Navbar.Brand>
                         </Col>
                         <Col xs={3} md={1}>
                             <div><Navbar.Brand className="username">{user.userName}</Navbar.Brand></div>
-                            <Navbar.Brand className="user_role">{user.userRole}</Navbar.Brand>
+                            <Navbar.Brand className="user-role">{user.userRole}</Navbar.Brand>
                         </Col>
                     </Row>
                 </Container>
             </Navbar>
-            {user.userRole && user.userRole.toLowerCase() === "admin" && <>admin</>}
+            {user.userRole && user.userRole.toLowerCase() === "admin" && <AdminGallery images={images}></AdminGallery>}
             {user.userRole && user.userRole.toLowerCase() === "guest" && <GuestGallery images={images}></GuestGallery>}
 
 

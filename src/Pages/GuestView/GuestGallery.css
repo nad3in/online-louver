@@ -1,13 +1,13 @@
 .body{
     padding: 1rem;
 }
-.gallery_header{
+.gallery-header{
     padding: 1rem;
 }
 .username{
     font-size: 1rem;
 }
-.user_role{
+.user-role{
     font-size: 0.8rem;
     color: gray!important;
 }

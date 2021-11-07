@@ -11,20 +11,20 @@
     margin: 0rem;
     font-size: 1.5rem;
 }
-.login_card{
+.login-card{
     min-width: 35%;
     min-height: 54%;
 }
-.login_card_body{
+.login-card-body{
     width: 70%;
 }
-.login_form_label{
+.login-form-label{
     margin-bottom: 0.3rem;
     font-weight: 700;
     font-size: 0.75rem;
     padding-left: 0.65rem;
 }
-.login_btn{
+.login-btn{
     width:100%
 }
 .separator-wrapper{

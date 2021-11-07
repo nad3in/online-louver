@@ -1,0 +1,24 @@
+.art-pieces-wrapper{
+    display: flex;
+    width:100vw;
+    height: 90vh;
+}
+.user-views{
+    background-color: white;
+    border-right: 1px solid #E5E5E6;
+    width: 5rem;
+}
+.nav-icon{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    
+}
+.supervised-user-icon{
+    padding: 0.4rem;
+    border:1px solid #C6C6D2 !important;
+}
+.user-icon{
+    padding: 0.55rem;
+    border:1px solid #C6C6D2!important;
+}
