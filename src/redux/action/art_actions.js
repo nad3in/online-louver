@@ -10,7 +10,7 @@ export function getArtPieces(data) {
             }
         })
             .then(response => { return response.json() }).then(data => dispatch(setArtPieces(data)))
-            .catch(() => { return false });
+            .catch((e) => { console.log(e); return false });
     }
 
 }
@@ -20,4 +20,27 @@ export function setArtPieces(data) {
         data
     }
 
+}
+export function deleteArtPiece(id) {
+    return (dispatch) => {
+        fetch(`${process.env.REACT_APP_api_local_base_url}/art`, {
+            method: 'delete',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-access-token': localStorage.getItem("jwt")
+            },
+            body: JSON.stringify({ id: id })
+        })
+            .then(response => { return response.json() }).then(data => {
+                dispatch(removePiece(data))
+            })
+            .catch((e) => { console.log(e); return false });
+    }
+}
+
+export function removePiece(id) {
+    return {
+        type: actionTypes.DELETE_ART_PIECE,
+        id
+    }
 }
