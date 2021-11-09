@@ -1,5 +1,6 @@
 const initialState = {
     user: {},
-    artPieces: {}
+    artPieces: {},
+    users: {}
 };
 export default initialState;

@@ -3,7 +3,7 @@ import * as user from './actionTypes'
 export function getUserInfo(userData) {
     return (dispatch) => {
         return fetch(`${process.env.REACT_APP_api_local_base_url}/login`, {
-            method: 'POST', // or 'PUT'
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -11,7 +11,7 @@ export function getUserInfo(userData) {
         })
             .then(response => response.json())
             .then(data => { dispatch(setUserInfo({ userName: data["user_name"], userRole: data["user_role"], isAuthanticated: data["token" ? true : false] })); localStorage.setItem('jwt', data.token); localStorage.setItem('username', data["user_name"]); localStorage.setItem('userRole', data["user_role"]); return true; })
-            .catch(() => { return false });
+            .catch((e) => { console.log(e); return false });
     }
 
 }
