@@ -86,7 +86,6 @@ const AdminGallery = (props) => {
     );
 }
 const mapStateToProps = state => {
-    console.log(state)
     return {
         artPieces: state.artPieces,
         users: state.users

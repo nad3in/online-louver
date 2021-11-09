@@ -16,7 +16,6 @@ const Login = (props) => {
         }
         var result = await props.getUserInfo(data);
         if (result) {
-            console.log("test")
             props.history.push('/gallery');
         }
     }
